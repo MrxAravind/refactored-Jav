@@ -1,0 +1,10 @@
+static-ffmpeg
+requests
+pyrotgfork
+techzdl
+python-dotenv
+swibots
+TgCrypto
+bs4
+vcsi
+telegraph
