@@ -1,10 +1,10 @@
 static-ffmpeg
 requests
-pyrotgfork
-techzdl
+git+https://github.com/Hrishi2861/pyrofork-2.2.11-peer-fix.git
 python-dotenv
-swibots
 TgCrypto
 bs4
 vcsi
 telegraph
+aria2p
+aria2
