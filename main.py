@@ -9,7 +9,11 @@ from pyrogram import Client
 from config import *
 from downloader import *
 from database import connect_to_mongodb, find_documents, insert_document
+import static_ffmpeg
 
+
+
+static_ffmpeg.add_paths()
 # Connect to aria2
 api = connect_aria2()
 
