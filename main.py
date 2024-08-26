@@ -116,7 +116,7 @@ async def start_download():
     async with app:
         while True:
             try:
-                hanime_links = fetch_hanime_links()
+                hanime_links = fetch_hanime_data()[0:100]
                 print(f"Total links found: {len(hanime_links)}")
                 for title, thumb, url in hanime_links:
                     file_path = f"Downloads/{title}.mp4"
