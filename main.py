@@ -138,6 +138,7 @@ async def start_download():
                             os.remove(thumb_path)
             except Exception as e:
                 print(f"Error during download process: {e}")
+        asnycio.sleep(1200)
 
 if __name__ == "__main__":
     app.run(start_download())
