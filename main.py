@@ -45,9 +45,9 @@ def fetch_hanime_data():
     page = 1
     base_url = 'https://hanimes.org/category/'
     categories = [
-        "new-hanime", "tsundere", "harem", "reverse", "milf", "romance", 
-        "school", "fantasy", "ahegao", "public", "ntr", "gb", "incest", 
-        "uncensored", "ugly-bastard"
+        "category/new-hanime", "category/tsundere", "category/harem", "category/reverse", "category/milf", "category/romance", 
+        "category/school", "category/fantasy", "category/ahegao", "category/public", "category/ntr", "category/gb", "category/incest", 
+        "tag/uncensored", "category/ugly-bastard"
     ]
 
     with requests.Session() as session:
