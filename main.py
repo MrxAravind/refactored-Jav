@@ -113,7 +113,7 @@ def generate_thumbnail(file_name, output_filename):
 
 async def start_download():
     async with app:
-        while True:
+        if True:
             try:
                 hanime_links = fetch_hanime_data()[0:50]
                 print(f"Total links found: {len(hanime_links)}")
