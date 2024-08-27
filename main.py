@@ -10,6 +10,7 @@ from config import *
 from downloader import *
 from database import connect_to_mongodb, find_documents, insert_document
 import static_ffmpeg
+import time
 
 
 
@@ -38,16 +39,13 @@ def format_bytes(byte_count):
         index += 1
     return f"{byte_count:.2f} {suffixes[index]}"
 
-import requests
-from bs4 import BeautifulSoup
-import time
 
 def fetch_hanime_data():
     documents = find_documents(db, collection_name)
     downloaded_files = {doc["File_Name"] for doc in documents}
     links = []
     page = 1
-    base_url = 'https://hanimes.org/category/'
+    base_url = 'https://hanimes.org/'
     categories = [
         "category/new-hanime", "category/tsundere", "category/harem", "category/reverse", "category/milf", "category/romance", 
         "category/school", "category/fantasy", "category/ahegao", "category/public", "category/ntr", "category/gb", "category/incest", 
@@ -58,6 +56,7 @@ def fetch_hanime_data():
         while len(links) < 100:
             pagel = f"/page/{page}/"
             for category in categories:
+                print(f"{category} | Page:{page}")
                 try:
                     response = session.get(f"{base_url}{category}{pagel}")
                     response.raise_for_status()
