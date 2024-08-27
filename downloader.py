@@ -15,11 +15,20 @@ def add_download(api, url, filename):
     try:
         # Set the options for the download
         options = {"out": filename}  # Specify the desired filename
-        download = api.add(url, options=options)
-        print(f"Download added: {download.gid} with filename: {filename}")
-        return download
+        download_list = api.add(url, options=options)
+
+        if isinstance(download_list, list):
+            for download in download_list:
+                print(f"Download added: {download.gid} with filename: {filename}")
+        else:
+            download = download_list
+            print(f"Download added: {download.gid} with filename: {filename}")
+        return download_list
     except Exception as e:
         print(f"Failed to add download: {e}")
+        return None
+
+
 
 # Pause a download by GID
 def pause_download(api, gid):
