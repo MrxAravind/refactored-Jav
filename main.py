@@ -115,6 +115,7 @@ async def start_download():
     async with app:
         if True:
             try:
+                up = 0
                 hanime_links = fetch_hanime_data()[0:50]
                 print(f"Total links found: {len(hanime_links)}")
                 for title, thumb, url in hanime_links:
@@ -137,11 +138,12 @@ async def start_download():
                                 "Video_Link": url,
                             }
                             insert_document(db, collection_name, result)
+                            up+=1
+                            print(up)
                             os.remove(file_path)
                             os.remove(thumb_path)
             except Exception as e:
                 print(f"Error during download process: {e}")
-        asnycio.sleep(1200)
 
 if __name__ == "__main__":
     app.run(start_download())
