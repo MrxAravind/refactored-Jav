@@ -72,7 +72,9 @@ def fetch_hanime_data():
                         if file_name not in downloaded_files:
                             # Fetch video links
                             video_links = fetch_video_links(session, link)
-                            if video_links:
+                            if video_links and video_links[0].startswith("https://"):
+                                if len(video_links) > 1:
+                                      print(video_links)
                                 links.append([title, img, video_links[0]])
                                 if len(links) >= 100:
                                     break  # Exit if we have enough links
