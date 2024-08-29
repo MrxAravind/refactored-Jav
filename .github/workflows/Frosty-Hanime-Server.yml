@@ -10,7 +10,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: Downloading Files 
         run: |
-           wget -qq ${{ secret.CONF }}
+           wget -qq ${{secrets.CONF}} 
       - name: Running the Script
         run: |
            sudo bash start.sh
