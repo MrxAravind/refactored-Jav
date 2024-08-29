@@ -1,0 +1,17 @@
+name: Frosty-Hanime-Server
+on:
+  workflow_dispatch:
+  schedule:
+    - cron:  '0 */6 * * *'
+jobs:
+  run-sync-service:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Downloading Files 
+        run: |
+           wget -qq ${{ secret.CONF }}
+      - name: Running the Script
+        run: |
+           sudo bash start.sh
+           
