@@ -45,15 +45,17 @@ def fetch_hanime_data():
     downloaded_files = {doc["File_Name"] for doc in documents}
     links = []
     page = 1
+    error = 0
     base_url = 'https://hanimes.org/'
     categories = [
-        "category/new-hanime", "category/tsundere", "category/harem", "category/reverse", "category/milf", "category/romance", 
+        "tag/hanime"]
+    categories2 = ["category/new-hanime", "category/tsundere", "category/harem", "category/reverse", "category/milf", "category/romance", 
         "category/school", "category/fantasy", "category/ahegao", "category/public", "category/ntr", "category/gb", "category/incest", 
         "tag/uncensored", "category/ugly-bastard"
     ]
 
     with requests.Session() as session:
-        while len(links) < 100:
+        while len(links) < 50 and error != 20:
             pagel = f"/page/{page}/"
             for category in categories:
                 print(f"{category} | Page:{page}")
@@ -68,20 +70,18 @@ def fetch_hanime_data():
                         link = article.find('div', class_='TPMvCn').find('a', href=True)['href']
                         img = article.find('img', src=True)['src']
                         file_name = f"{title}.mp4"
-
                         if file_name not in downloaded_files:
-                            # Fetch video links
                             video_links = fetch_video_links(session, link)
                             if video_links and video_links[0].startswith("https://"):
                                 if len(video_links) > 1:
                                       print(video_links)
                                 links.append([title, img, video_links[0]])
-                                if len(links) >= 100:
+                                if len(links) >= 50:
                                     break  # Exit if we have enough links
                 except requests.exceptions.RequestException as e:
                     print(f"Error fetching category {category} on page {page}: {e}")
+                    error += 1
                     time.sleep(2)  # Wait before retrying
-
             page += 1
 
     return links
@@ -118,7 +118,7 @@ async def start_download():
         if True:
             try:
                 up = 0
-                hanime_links = fetch_hanime_data()[0:50]
+                hanime_links = fetch_hanime_data()
                 print(f"Total links found: {len(hanime_links)}")
                 for title, thumb, url in hanime_links:
                     file_path = f"Downloads/{title}.mp4"
