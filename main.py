@@ -95,7 +95,7 @@ async def process_downloads(app, device, linkgrabber):
     """Process the downloads by checking statuses and uploading to Telegram."""
     uploaded = []
     downloaded = []
-    while True:
+    if True:
         try:
             downloads = device.downloads.query_links()
             if not downloads:
@@ -111,7 +111,6 @@ async def process_downloads(app, device, linkgrabber):
                         downloaded.append(i["name"])
                         split_files = split_video(file_path)
                         thumbnail_name = f"{i['name']}_thumb.png"
-                
                         logging.info(file_path)
                         for file in split_files:
                             logging.info("Generating Thumbnail")
