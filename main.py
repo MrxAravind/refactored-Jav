@@ -95,7 +95,7 @@ async def process_downloads(app, device, linkgrabber):
     """Process the downloads by checking statuses and uploading to Telegram."""
     uploaded = []
     downloaded = []
-    if True:
+    while True:
         try:
             downloads = device.downloads.query_links()
             if not downloads:
@@ -122,6 +122,7 @@ async def process_downloads(app, device, linkgrabber):
                         os.remove(file_path)
                         os.remove(thumbnail_name)
                         clear_downloads(device)
+                        break
                 else:
                     print_progress_bar(i['name'], i['bytesLoaded'], i['bytesTotal'])
                     print()
