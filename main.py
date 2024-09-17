@@ -111,7 +111,7 @@ async def process_downloads(app, device, linkgrabber):
                         downloaded.append(i["name"])
                         split_files = split_video(file_path)
                         thumbnail_name = f"{i['name']}_thumb.png"
-                        
+                
                         logging.info(file_path)
                         for file in split_files:
                             logging.info("Generating Thumbnail")
@@ -120,9 +120,9 @@ async def process_downloads(app, device, linkgrabber):
                             await app.send_video(DUMP_ID, file, thumb=thumbnail_name, progress=progress)
                             os.remove(file)
                         
-                        # Clear the file after processing
                         os.remove(file_path)
                         os.remove(thumbnail_name)
+                        clear_downloads(device)
                 else:
                     print_progress_bar(i['name'], i['bytesLoaded'], i['bytesTotal'])
                     print()
